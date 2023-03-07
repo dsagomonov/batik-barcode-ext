@@ -22,7 +22,7 @@ public final class BarcodeElementBridge extends SVGDecoratedShapeElementBridge i
 
     @Override
     public String getNamespaceURI() {
-        return "http://xml.apache.org/batik/ext";
+        return BATIK_EXT_NAMESPACE_URI;
     }
 
     @Override
@@ -39,28 +39,28 @@ public final class BarcodeElementBridge extends SVGDecoratedShapeElementBridge i
     @Override
     protected void buildShape(BridgeContext ctx, Element e, ShapeNode shapeNode) {
         UnitProcessor.Context uctx = org.apache.batik.bridge.UnitProcessor.createContext(ctx, e);
-        String s = e.getAttributeNS((String) null, "cx");
-        float cx = 0.0F;
+        String s = e.getAttributeNS((String) null, BATIK_EXT_X_ATTRIBUTE);
+        float x = 0.0F;
         if (s.length() != 0) {
-            cx = org.apache.batik.bridge.UnitProcessor.svgHorizontalCoordinateToUserSpace(s, "cx", uctx);
+            x = org.apache.batik.bridge.UnitProcessor.svgHorizontalCoordinateToUserSpace(s, BATIK_EXT_X_ATTRIBUTE, uctx);
         }
 
-        s = e.getAttributeNS((String) null, "cy");
-        float cy = 0.0F;
+        s = e.getAttributeNS((String) null, BATIK_EXT_Y_ATTRIBUTE);
+        float y = 0.0F;
         if (s.length() != 0) {
-            cy = org.apache.batik.bridge.UnitProcessor.svgVerticalCoordinateToUserSpace(s, "cy", uctx);
+            y = org.apache.batik.bridge.UnitProcessor.svgVerticalCoordinateToUserSpace(s, BATIK_EXT_Y_ATTRIBUTE, uctx);
         }
 
         float width = 1.0F;
-        s = e.getAttributeNS((String) null, "width");
+        s = e.getAttributeNS((String) null, BATIK_EXT_WIDTH_ATTRIBUTE);
         if (s.length() != 0) {
-            width = org.apache.batik.bridge.UnitProcessor.svgHorizontalCoordinateToUserSpace(s, "width", uctx);
+            width = org.apache.batik.bridge.UnitProcessor.svgHorizontalCoordinateToUserSpace(s, BATIK_EXT_WIDTH_ATTRIBUTE, uctx);
         }
 
         float height = 20.0F;
-        s = e.getAttributeNS((String) null, "height");
+        s = e.getAttributeNS((String) null, BATIK_EXT_HEIGHT_ATTRIBUTE);
         if (s.length() != 0) {
-            height = org.apache.batik.bridge.UnitProcessor.svgVerticalCoordinateToUserSpace(s, "height", uctx);
+            height = org.apache.batik.bridge.UnitProcessor.svgVerticalCoordinateToUserSpace(s, BATIK_EXT_HEIGHT_ATTRIBUTE, uctx);
         }
 
 
@@ -84,13 +84,13 @@ public final class BarcodeElementBridge extends SVGDecoratedShapeElementBridge i
             BitMatrix matrix = writerSupplier.get().encode(input, format, 0, 0, Collections.emptyMap());
             BitArray bitArray = matrix.getRow(0, null);
             GeneralPath gp = new GeneralPath();
-            float y2 = cy + height;
+            float y2 = y + height;
             for (int i = 0; i < bitArray.getSize(); i++) {
                 if (bitArray.get(i)) {
-                    float x1 = cx + i * width;
+                    float x1 = x + i * width;
                     float x2 = x1 + width;
-                    gp.moveTo(x1, cy);
-                    gp.lineTo(x2, cy);
+                    gp.moveTo(x1, y);
+                    gp.lineTo(x2, y);
                     gp.lineTo(x2, y2);
                     gp.lineTo(x1, y2);
                     gp.closePath();

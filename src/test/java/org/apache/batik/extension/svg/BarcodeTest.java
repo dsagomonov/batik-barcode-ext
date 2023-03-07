@@ -31,7 +31,7 @@ public class BarcodeTest {
                 "     color=\"black\" font-family=\"PT Mono\" height=\"192px\" viewBox=\"0 0 336 192\"\n" +
                 "     width=\"336px\">\n" +
                 "    <g>\n" +
-                "        <bc:barcode cx=\"50\" cy=\"30\" format=\"code-128\" width=\"2\" height=\"56\">900000155030</bc:barcode>\n" +
+                "        <bc:barcode x=\"50\" y=\"30\" format=\"code-128\" width=\"2\" height=\"56\">900000155030</bc:barcode>\n" +
                 "        <text font-size=\"12pt\" font-weight=\"bold\" x=\"192\" y=\"96\"/>\n" +
                 "        <text font-size=\"14pt\" font-weight=\"bold\" x=\"182\" y=\"120\"><![CDATA[900000155]]></text>\n" +
                 "        <text font-size=\"14pt\" font-weight=\"bold\" x=\"294\" y=\"120\"><![CDATA[030]]></text>\n" +
